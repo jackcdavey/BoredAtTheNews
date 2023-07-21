@@ -27,8 +27,7 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 current_date = datetime.now().date()
 formatted_date = current_date.strftime("%Y-%m-%d")
 
-# I know putting API keys directly in code is a sin, don't plan to make this repo public
-openai.api_key = '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'
+openai.api_key = os.getenv('OPENAI_API_KEY')
 
 # Channel ID where the bot will send messages
 channel_id = 1108474181034713228
@@ -51,7 +50,7 @@ async def generate_message():
     try:
         response = openai.Completion.create(
             engine="text-davinci-003",
-            prompt="Announce the following news headline from the perspective of an annoyed, snarky, and clearly misinformed teen running a news and gossip account on social media, in 2 or 3 sentences. Include your thoughts and analysis.\n\n" +
+            prompt="Announce the following news headline from the perspective of an annoyed, snarky, and clearly misinformed teen running a news and gossip account on social media, in 2 or 3 sentences. Include your thoughts and analysis, potentially from misreading or misunderstanding the headline.\n\n" +
             chosen_headline.text,
             temperature=0.5,
             max_tokens=500
@@ -128,7 +127,7 @@ async def analyze(ctx, *, user_input=None):
 
         response = openai.Completion.create(
             engine="text-davinci-003",
-            prompt="Announce the following news headline from the perspective of an annoyed, snarky, and clearly misinformed teen running a news and gossip account on social media, in 2 or 3 sentences. Include your thoughts and analysis.\n\n" +
+            prompt="Imagine you're a sassy, perpetually eye-rolling teenager who's somehow landed the job of running a news and gossip account on social media. You're notorious for your hilarious misinterpretations and wild conspiracy theories. Now, take this news headline and spin it into a several sentence commentary that's dripping with your signature snark and sass. Remember, facts are optional, drama is mandatory!\n\n" +
             chosen_headline_text,
             temperature=0.5,
             max_tokens=500
