@@ -29,6 +29,7 @@ formatted_date = current_date.strftime("%Y-%m-%d")
 
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
+
 # Channel ID where the bot will send messages
 channel_id = 1108474181034713228
 
@@ -153,4 +154,4 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandError):
         await ctx.send(f'An error occurred: {str(error)}')
 
-bot.run('MTEwODQ0NzUxODg3MTc4NTQ3Mg.GSmcxo.Kbrunool4lQ_JCQXfhB3qG-7oJ5wwryw7qDUO4')
+bot.run(os.getenv('DISCORD_API_KEY'))
